@@ -8,7 +8,7 @@
                 .when('/slides',            { templateUrl: 'partial/slides.html',   controller: 'SlidesController' })
                 .when('/slide/new',         { templateUrl: 'partial/new.html',      controller: 'NewSlideController' })
                 .when('/slide/admin/:id',   { templateUrl: 'partial/admin.html',      controller: 'AdminController' })
-                .when('/slide/:id',         { templateUrl: 'partial/empty.html',    controller: 'SlideController' })
+                .when('/slide/:id',         { templateUrl: 'partial/slide.html',    controller: 'SlideController' })
                 .otherwise({ redirectTo: '/slides' });
         }])
 
@@ -64,7 +64,7 @@
                     };
 
                     var slides = data;
-                    var wsUri = document.location.host + document.location.pathname + (document.location.pathname == '/' ? '' : '/') + 'slideshow/' + $routeParams.id;
+                    var wsUri = 'ws://' + document.location.host + document.location.pathname + (document.location.pathname == '/' ? '' : '/') + 'slideshow/' + $routeParams.id;
                     var iframe = document.createElement("iframe");
                     iframe.id = 'internal-iframe';
                     iframe.frameBorder = '0';
@@ -95,7 +95,7 @@
                     '<script>' +
                     'Reveal.initialize(' + JSON.stringify(revealConfig) + ');' +
                     'var socket = new WebSocket("' + wsUri + '");' +
-                    'document.getElementById("internal-iframe").onclose = function () {' +
+                    'document.body.onbeforeunload = function () {' +
                     '  socket.close();' +
                     '};' +
                     'socket.onmessage = function (e) {' +
@@ -104,12 +104,11 @@
                     '  if (cmd.action == "NEXT") {' +
                     '    Reveal.next();' +
                     '  } else if (cmd.action == "PREVIOUS") {' +
-                    '    Reveal.previous();' +
+                    '    Reveal.prev();' +
                     '  }' +
                     '};' +
                     '' +
                     '</script>' +
-                    '<!-- TODO: add websocket handling -->' +
                     '</body>' +
                     '</html>';
 

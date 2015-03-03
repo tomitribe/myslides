@@ -11,34 +11,27 @@ import javax.websocket.Session;
 
 @ApplicationScoped
 public class SlideShowManager {
-    private final Map<String, Session> sessionsById = new HashMap<>();
+    private final Map<Long, Session> sessionsById = new HashMap<>();
+    private final Map<Session, Long> slideIdBySession = new HashMap<>();
 
     public void register(final Session session, final Long slideId) {
-        sessionsById.put(session.getId(), session);
-        session.getUserProperties().put("id", slideId);
-    }
-
-    public Session findById(final String id) {
-        return sessionsById.get(id);
-    }
-
-    public Long findBySlideId(final String id) {
-        return Long.class.cast(sessionsById.get(id).getUserProperties().get("id"));
+        sessionsById.put(slideId, session);
+        slideIdBySession.put(session, slideId);
     }
 
     public void deRegister(final Session session) {
-        sessionsById.remove(session.getId());
+        sessionsById.remove(slideIdBySession.remove(session));
     }
 
-    public void next(final String id) {
+    public void next(final Long id) {
         doSend(id, Command.NEXT);
     }
 
-    public void previous(final String id) {
+    public void previous(final Long id) {
         doSend(id, Command.PREVIOUS);
     }
 
-    private void doSend(final String id, final Command cmd) {
+    private void doSend(final Long id, final Command cmd) {
         try {
             sessionsById.get(id).getBasicRemote().sendObject(cmd);
         } catch (final EncodeException | IOException e) {

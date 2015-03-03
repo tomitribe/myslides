@@ -1,0 +1,44 @@
+WARNING: work in progress
+
+TODO:
+- make it sexy
+- make slide upload better (surely zip upload finally)
+- make authentication smooth
+- support wss as well as ws
+- ATM 1 slideshow can be done by a single user at a time, see if we want to really use session slideshow (need to enhance a bit the protocol)
+
+= How to test
+
+1) mvn process-classes tomee-embedded:run
+2) http://localhost:8080
+3) login as test/test
+4) new slides
+5) paste
+
+[source]
+----
+<section data-asciidoctor>
+ = Slide 1
+ 
+ 1
+</section>
+<section data-asciidoctor>
+ = Slide 2
+ 
+ 2
+</section>
+<section data-asciidoctor>
+ = Slide 3
+ 
+ 3
+</section>
+<section data-asciidoctor>
+ = Slide 4
+ 
+ 4
+</section>
+----
+
+6) login on another tab
+7) go on remote slide link
+8) play with next/previous

@@ -21,13 +21,13 @@ public class AdminResource {
 
     @HEAD
     @Path("actions/next/{id}")
-    public void next(@PathParam("id") final String id) {
+    public void next(@PathParam("id") final long id) {
         slideShowManager.next(id);
     }
 
     @HEAD
     @Path("actions/previous/{id}")
-    public void previous(@PathParam("id") final String id) {
+    public void previous(@PathParam("id") final long id) {
         slideShowManager.previous(id);
     }
 }
