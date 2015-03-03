@@ -6,6 +6,8 @@ TODO:
 - make authentication smooth
 - support wss as well as ws
 - ATM 1 slideshow can be done by a single user at a time, see if we want to really use session slideshow (need to enhance a bit the protocol)
+- be able to handle other kind of slides (basically images slides == get rid of reveal)
+- generate image slides from ppt/key
 
 = How to test
 
