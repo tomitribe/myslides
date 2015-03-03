@@ -1,0 +1,8 @@
+<form class="form">
+    <h2 class="form-signin-heading">New slideshow</h2>
+    <label for="name" class="sr-only">Name</label>
+    <input id="name" class="form-control" placeholder="Name..." ng-model="slide.name" required autofocus>
+    <label for="content" class="sr-only">Content</label>
+    <textarea id="content" class="form-control" placeholder="Content..." ng-model="slide.content" required></textarea>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="save()">Save</button>
+</form>

@@ -1,0 +1,6 @@
+<ul>
+    <li><a href="#/slide/new">New slideshow</a></li>
+    <li ng-repeat="slide in slides | orderBy:'name'">
+        <a href="#/slide/{{ slide.id }}">See {{ slide.name }}</a> | <a href="#/slide/admin/{{ slide.sid }}">Remote {{ slide.name }}</a>
+    </li>
+</ul>
